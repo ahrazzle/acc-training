@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>PukhACC — Orientation Tour</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Outfit:wght@600;700&family=Source+Sans+3:wght@400;500;600&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<!-- Early theme apply: set [data-theme] before first paint so a
+     returning dark-mode user never sees a light flash. Safe on
+     file://; wrapped in try/catch for privacy-mode storage. -->
+<script>
+  try { if (localStorage.getItem("pukhacc-theme") === "dark") document.documentElement.setAttribute("data-theme", "dark"); } catch (e) {}
+</script>
+<link rel="stylesheet" href="css/app.css">
+</head>
+<body>
+<!-- ============================================================
+     PukhACC — Orientation-level interactive tour shell
+     Static web app. No backend, no auth, no network at runtime.
+     Opens from a double-click on index.html (file://) or any
+     static host. See js/data.js for the ACC object model, which
+     is the "fidelity contract" — mirrors real ACC structure so
+     the learner's mental model transfers to the real product.
+     ============================================================ -->
+
+<div id="app" class="app">
+
+  <!-- Sidebar: module navigation (read-only, no state to lose) -->
+  <aside class="sidebar" aria-label="Module navigation">
+    <div class="brand">
+      <div class="brand-mark" aria-hidden="true"><img src="img/riotfist.jpeg" alt=""></div>
+      <div>
+        <div class="brand-name">PukhACC</div>
+        <div class="brand-sub">Orientation Tour</div>
+      </div>
+    </div>
+
+    <nav class="nav" id="nav">
+      <!-- sections rendered from data.js -->
+    </nav>
+
+    <!-- Theme control: persistent app chrome, same place every view.
+         Stored in localStorage so the choice sticks across sessions. -->
+    <div class="theme-control" id="theme-control" role="switch" aria-checked="false" tabindex="0" title="Toggle dark mode">
+      <span class="theme-track"><span class="theme-thumb"></span></span>
+      <span class="theme-label">Dark</span>
+    </div>
+
+    <!-- Product-naming control: Forma current (default) vs ACC legacy.
+         Same switch pattern; relabels every occurrence of the renamed
+         products/roles so the learner can follow teammates using old names. -->
+    <div class="theme-control term-control" id="term-control" role="switch" aria-checked="false" tabindex="0" title="Switch product naming: Forma (current) vs ACC (legacy)">
+      <span class="theme-track"><span class="theme-thumb"></span></span>
+      <span class="theme-label">Forma names</span>
+    </div>
+
+    <!-- Reset: restores any cleared elements on the current view (and
+         clears their stored state). Cosmetic-only safety net. -->
+    <button class="reset-control" id="reset-control" type="button">Reveal everything</button>
+
+    <div class="sidebar-foot">
+      <div class="sidebar-foot-label">For a Metrolinx learner</div>
+      <div class="sidebar-foot-text">Understand ACC well enough to work alongside the team that uses it.</div>
+    </div>
+  </aside>
+
+  <!-- Main content area: one view rendered per module -->
+  <main class="main" id="main" tabindex="-1"></main>
+
+  <!-- Tour hotspot popover (managed by tour.js) -->
+  <div id="popover" class="popover" hidden>
+    <button class="popover-close" id="popover-close" aria-label="Close">&#10005;</button>
+    <div class="popover-title" id="popover-title"></div>
+    <div class="popover-body" id="popover-body">
+      <div class="pp-tag"></div>
+      <div class="pp-copy"></div>
+    </div>
+    <div class="popover-foot" id="popover-foot"></div>
+  </div>
+</div>
+
+<!-- Plain script tags (not ES modules) so the app runs from file://
+     without CORS issues. Order matters: data.js first, then tour.js,
+     then app.js (the renderer). -->
+<script src="js/data.js"></script>
+<script src="js/tour.js"></script>
+<script src="js/app.js"></script>
+</body>
+</html>
