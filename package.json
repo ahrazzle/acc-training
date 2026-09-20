@@ -1,0 +1,10 @@
+{
+  "description": "ACC Training \u2014 orientation tour for a Metrolinx learner",
+  "name": "acc-training",
+  "private": true,
+  "scripts": {
+    "test": "node tests/validate.mjs && node tests/render-smoke.mjs"
+  },
+  "type": "module",
+  "version": "1.0.0"
+}
