@@ -14,7 +14,7 @@ Training materials and interactive demo for ACC.
 - Track 1 — Governance / access (5 views)
 - Track 2 — Data management (5 views)
 - Track 3 — Integration (5 views)
-- Case studies (5 views: 3 synthetic + 1 real deployment)
+- Case studies (5 views: intro + 3 synthetic + 1 real deployment)
 - Where this is heading — AI (3 views)
 - Close (1 view)
 

@@ -449,7 +449,7 @@ const VIEWS = {
 "t2-status": [
   { t: "kicker", x: "Track 2 · Data management — the status ladder" },
   { t: "h1", x: "The status ladder" },
-  { t: "lead", x: "Every file in a governed CDE carries a status — Draft, In Review, Approved. That status is what decides whether the file may be used. This is the ladder, and the mechanics that make it real." },
+  { t: "lead", x: "Every file in a governed CDE carries a status — Draft, In Review, Approved, As-Built. That status is what decides whether the file may be used. This is the ladder, and the mechanics that make it real." },
   { t: "h2", x: "The four rungs" },
   { t: "table", head: ["Status", "Meaning", "Who moves it", "The rule"], rows: [
     ["Draft", "The author's working state", "The author", "Nobody treats it as current"],
@@ -464,7 +464,7 @@ const VIEWS = {
     "No silent edits in review: once a file enters review, the author cannot quietly change it and resubmit the same version — the version is locked until the review closes.",
     "Transmittals log every handover: when a record moves — to a contractor, to the client — the transmittal is the dated, signed record of what left, in which revision, to whom.",
   ]},
-  { t: "callout", kind: "highlight", title: "The ladder is the zone model, renamed", x: "WIP is Draft. Shared is In Review. Final Publication is Approved. The four-zone CDE on the next page is this ladder given a physical home — the zones are where each rung lives." },
+  { t: "callout", kind: "highlight", title: "The ladder, mapped to the zones", x: "WIP is Draft. Both Shared zones — Internal and Client — are In Review: internal checks first, client review next. Final Publication is the record: Approved for construction, and As-Built as the operator’s handed-over copy. The four-zone CDE on the next page is this ladder given a physical home — one rung per zone, with In Review spanning two." },
   { t: "footer", x: "Next: the four-zone CDE — a real project's document-control spine." },
 ],
 
@@ -596,7 +596,7 @@ const VIEWS = {
   { t: "question", x: "And when an AI is added to the data flow \u2014 who signs off the rule that governs it, and whose role does it inherit?", body: "The projected question. The answer should place the AI on a named seam (inside ACC, on an export path, or as an agent) and name a decision owner. 'It's still being discussed' is honest \u2014 and is itself the current-state finding." },
   { t: "question", x: "And when AI agents arrive \u2014 could a role be exercised by an unattended agent, and would we know?", body: "The projected question. If the answer is 'we would not know', the audit capability itself is the gap to fix first \u2014 before the agents arrive." },
   { t: "callout", kind: "accent", title: "The pattern", x: "Once more, the same shape: name the thing, name the owner, show the trail. Integration governance is seam-by-seam evidence." },
-  { t: "footer", x: "Next: where this is heading \u2014 AI as the next actor." },
+  { t: "footer", x: "Next: put the map to work \u2014 four cases." },
 ],
 
 /* ============ CASE STUDIES — guided detective sequences ============ */
