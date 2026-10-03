@@ -272,7 +272,7 @@ const VIEWS = {
   { t: "h2", x: "What reach looks like in practice" },
   { t: "p", x: "The table above names the tiers. This is what each tier can concretely do — and, just as importantly, what it cannot." },
   { t: "table", head: ["Role", "Can concretely…", "Cannot…"], rows: [
-    ["Account Admin", "Create projects, appoint Project Admins, see the audit log of the whole account", "Nothing — this is the widest reach in the system"],
+    ["Account Admin", "Create projects, appoint Project Admins, see the audit log of the whole account", "Nothing — no other role can limit it"],
     ["Project Admin", "Invite members, assign product roles, set folder permissions, read the project's audit trail", "Touch any other project"],
     ["Project Member — Editor", "Upload, edit, and share files inside the folders granted to them", "Grant anyone access, or open a folder they were not granted"],
     ["Project Member — Viewer", "Open and read what is granted to them", "Change anything, or reach beyond their grant"],
@@ -453,14 +453,14 @@ const VIEWS = {
   { t: "h2", x: "The four rungs" },
   { t: "table", head: ["Status", "Meaning", "Who moves it", "The rule"], rows: [
     ["Draft", "The author's working state", "The author", "Nobody treats it as current"],
-    ["In Review", "Submitted for check; locked against silent edits", "The review workflow", "Only the named approvers can sign it"],
+    ["In Review", "Submitted for check; locked against silent edits", "The named approvers", "The author cannot edit while review is open"],
     ["Approved", "Released for construction or decision", "The named validator", "Changes mean a new revision — never an overwrite"],
     ["As-Built", "Reflects what was actually built", "The field / completion team", "Becomes the operator's record"],
   ]},
   { t: "p", x: "Projects define their own status names, but a governed project always has these four rungs — working, checking, released, handed over. If a project cannot show you its ladder, its files have no enforceable meaning." },
   { t: "h2", x: "The mechanics that make it real" },
   { t: "bullets", items: [
-    "Named approvers, not 'the team': a review workflow names who validates and who quality-checks. On a real rail deployment the first workflow failed precisely because teams picked the wrong validators — the fix was preset, per-discipline workflows with the right people baked in.",
+    "Named approvers, not 'the team': a review workflow names who validates and who quality-checks. On a real rail deployment the first workflow failed because teams picked the wrong validators. The fix was preset, per-discipline workflows with the right people named from the start.",
     "No silent edits in review: once a file enters review, the author cannot quietly change it and resubmit the same version — the version is locked until the review closes.",
     "Transmittals log every handover: when a record moves — to a contractor, to the client — the transmittal is the dated, signed record of what left, in which revision, to whom.",
   ]},
