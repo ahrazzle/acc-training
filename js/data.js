@@ -31,27 +31,30 @@ const SECTIONS = [
     ]
   },
   {
-    id: "t1", num: "T1", label: "Governance — access", est: "8", items: [
+    id: "t1", num: "T1", label: "Governance — access", est: "10", items: [
       { id: "t1-intro",   num: "T1.1", label: "Permissions as exposure" },
       { id: "t1-roles",   num: "T1.2", label: "The ACC roles" },
-      { id: "t1-scheme",  num: "T1.3", label: "A real permission scheme" },
-      { id: "t1-questions", num: "T1.4", label: "Questions to ask" },
+      { id: "t1-grant",   num: "T1.3", label: "How access is granted" },
+      { id: "t1-scheme",  num: "T1.4", label: "A real permission scheme" },
+      { id: "t1-questions", num: "T1.5", label: "Questions to ask" },
     ]
   },
   {
-    id: "t2", num: "T2", label: "Data management", est: "8", items: [
+    id: "t2", num: "T2", label: "Data management", est: "10", items: [
       { id: "t2-intro",    num: "T2.1", label: "What is sensitive" },
       { id: "t2-lifecycle", num: "T2.2", label: "Record vs working copy" },
-      { id: "t2-cde4",     num: "T2.3", label: "The four-zone CDE" },
-      { id: "t2-questions", num: "T2.4", label: "Questions to ask" },
+      { id: "t2-status",   num: "T2.3", label: "The status ladder" },
+      { id: "t2-cde4",     num: "T2.4", label: "The four-zone CDE" },
+      { id: "t2-questions", num: "T2.5", label: "Questions to ask" },
     ]
   },
   {
-    id: "t3", num: "T3", label: "Integration", est: "8", items: [
+    id: "t3", num: "T3", label: "Integration", est: "10", items: [
       { id: "t3-intro",    num: "T3.1", label: "The seams" },
       { id: "t3-docs",     num: "T3.2", label: "EIR · AIR · MIDP" },
-      { id: "t3-mbs",      num: "T3.3", label: "Federation & token economics" },
-      { id: "t3-questions", num: "T3.4", label: "Questions to ask" },
+      { id: "t3-reading",  num: "T3.3", label: "Reading the information contract" },
+      { id: "t3-mbs",      num: "T3.4", label: "Federation & token economics" },
+      { id: "t3-questions", num: "T3.5", label: "Questions to ask" },
     ]
   },
   {
@@ -135,7 +138,7 @@ const VIEWS = {
     ["Project", "One job with its own folders, members, and permissions", "Ontario Line — Package S12 (Civil)"],
     ["Folder", "The structure inside a project, usually mapped to the work breakdown", "Design / Drawings / 04-Structural"],
     ["File", "One document or model with version history and a status", "S12-DWG-STR-0042_Rev C.pdf"],
-  ], mono: [3] },
+  ], mono: [2] },
   { t: "h2", x: "Simulated view — a Docs project" },
   { t: "p", x: "This is what a governed Docs workspace looks like. Hover or click any highlighted element to learn what it is." },
   { t: "acc", id: "acc-docs", titlebar: { logo: "ACC", crumb: "Ontario Line · Package S12 · Docs", badge: "Project Member" },
@@ -172,6 +175,8 @@ const VIEWS = {
     "Version and status control — you can always tell which revision is current and whether it is approved for use.",
     "Access control and audit — who saw or changed what is recorded and reviewable.",
   ]},
+  { t: "h2", x: "The difference it makes, concretely" },
+  { t: "p", x: "Before: the structural engineer emails Rev C of a drawing to the site team; the site team builds from Rev B, which someone downloaded last month and saved to a desktop. After: there is one record, it carries one status, and everyone who opens it sees the same file. The CDE does not just organise documents — it removes the entire class of failure where two people act on two different versions of the truth." },
   { t: "callout", kind: "accent", title: "Key fact for you", x: "On Metrolinx capital delivery the CDE is not a single system. The program stack runs several concurrently — ACC, Aconex, and SharePoint — each with its own role. That coexistence is the real integration story (Track 3)." },
   { t: "h2", x: "Why the CDE matters to governance" },
   { t: "p", x: "The CDE is where the rules become real. ISO 19650-style naming, review-and-approval workflows, and audit trails are not documents about the data — they are the operating rules of the CDE. When your governance team talks about enforcement, they mean what happens inside here." },
@@ -213,6 +218,8 @@ const VIEWS = {
     ["Edit (amber)", "Create and change within a scope", "A Docs editor can move files inside their folder"],
     ["Admin (red)", "Full control, including who else has access", "A Project Admin grants and revokes roles"],
   ], mono: [0] },
+  { t: "h2", x: "A worked example — reading one row" },
+  { t: "p", x: "Take the Project Member — Editor row and read across: edit on drawings and records, edit on field and quality records, edit on 3D models, view-only on quantities — and no access at all to roles and permissions. That last cell is the point: an editor can change the work, but cannot widen anyone's reach, including their own. Read any row the same way — the cells say what the role can do, and the narrowest cell is usually the one that matters." },
   { t: "h2", x: "The projected AI layer" },
   { t: "p", x: "The toggle above the map switches on the projected AI layer. It is labelled 'projected' deliberately: AI is not yet an actor on the program, and nothing here is a current diagnosis. What the toggle shows is where the same map will move when AI arrives — the roles an AI will inherit, and the data it will then be able to reach. You read this map human-first, and the AI layer as its projected future." },
   { t: "callout", kind: "highlight", title: "How you use this map", x: "You do not memorise it. You use it as a diagnostic: pick any data your team handles, find who can reach it today, and ask whether that reach is justified. When AI arrives, the same reach becomes the AI's boundary — which is exactly why the today-state must be right first." },
@@ -244,6 +251,8 @@ const VIEWS = {
     "The broadest roles — Account Admin, Project Admin — carry the widest reach and the fewest checks.",
     "When AI arrives it will inherit roles — so every access decision you make today becomes an AI-exposure decision tomorrow.",
   ]},
+  { t: "h2", x: "How drift actually happens" },
+  { t: "p", x: "It never starts as a decision. A contractor is added to a shared editor role 'just for this package' — and is still there eight months later. A leaver's account stays active because nobody told the Project Admin. Each one is small; together they are how a role balloons from eight people to forty-seven, which is exactly what Case 1 walks you through." },
   { t: "callout", kind: "warn", title: "The trap to look for", x: "A 'shared role' — one role many people sit in — is the classic failure. It is convenient, and it hides who actually did what. On a governed program, shared roles are where audit trails go to die." },
   { t: "footer", x: "Next: the actual ACC roles and what each can reach." },
 ],
@@ -260,11 +269,46 @@ const VIEWS = {
     ["Project Member — Viewer", "See what is granted, change nothing", "Reviewers, auditors, leads"],
     ["Role-scoped (per product)", "A narrow slice — e.g. Docs editor only, or Model Coordination viewer", "Discipline-specific staff"],
   ]},
+  { t: "h2", x: "What reach looks like in practice" },
+  { t: "p", x: "The table above names the tiers. This is what each tier can concretely do — and, just as importantly, what it cannot." },
+  { t: "table", head: ["Role", "Can concretely…", "Cannot…"], rows: [
+    ["Account Admin", "Create projects, appoint Project Admins, see the audit log of the whole account", "Nothing — no other role can limit it"],
+    ["Project Admin", "Invite members, assign product roles, set folder permissions, read the project's audit trail", "Touch any other project"],
+    ["Project Member — Editor", "Upload, edit, and share files inside the folders granted to them", "Grant anyone access, or open a folder they were not granted"],
+    ["Project Member — Viewer", "Open and read what is granted to them", "Change anything, or reach beyond their grant"],
+    ["Role-scoped (per product)", "Work inside their narrow slice — Docs only, or Build only", "Reach outside that slice at all"],
+  ]},
+  { t: "h2", x: "The grant is the governance" },
+  { t: "p", x: "Every one of those reaches exists because someone granted it — and every grant should be reviewable: who decided, when, and why. A role assignment is not paperwork; it is the decision that draws the boundary on the exposure map. The next page is about how those decisions are actually made, folder by folder." },
   { t: "h2", x: "The ladder, in plain words" },
   { t: "p", x: "From the bottom: a viewer can look but not touch. An editor can create and change within their slice. A Project Admin controls the slices themselves — who gets in, and what they can reach. An Account Admin controls everything across all projects. Each step up is a step wider in reach and a step higher in risk." },
   { t: "callout", kind: "highlight", title: "The governance question in one line", x: "Every reach should be the minimum needed for the job — and should be periodically re-audited, because roles do not shrink on their own." },
-  { t: "footer", x: "Next: the questions a lead asks about governance today." },
+  { t: "footer", x: "Next: how access is actually granted — role by role, folder by folder." },
 ],
+
+"t1-grant": [
+  { t: "kicker", x: "Track 1 · Governance — how access is granted" },
+  { t: "h1", x: "How access is actually granted" },
+  { t: "lead", x: "The exposure map shows what each role can reach. This is how that reach is built in practice — because in a real project, a role is only half the story." },
+  { t: "h2", x: "Two axes, not one" },
+  { t: "p", x: "A person's actual reach is the combination of two things. First, their product role — editor, viewer, admin — the palette of what they are allowed to do. Second, their folder permissions — which folders they can open, and at what level: view, download, or upload. Two people holding the same role can have very different reach, depending on which folders they were granted." },
+  { t: "p", x: "This is why the exposure map's rows are the starting point, not the full picture. The rows say what a role can do; the folder grants say where it is allowed to do it." },
+  { t: "h2", x: "The grant chain" },
+  { t: "table", head: ["Step", "Who decides", "What they decide"], rows: [
+    ["Account Admin creates the project", "The platform owner", "Which projects exist at all — and who the Project Admin of each one is"],
+    ["Project Admin grants the team", "The project information manager", "Who is a member, and which product role each member holds"],
+    ["Folder owners set folder permissions", "Typically document controllers or discipline leads", "Which folders each member or role can view, download from, or upload to"],
+  ]},
+  { t: "h2", x: "Why folder permissions are the real control" },
+  { t: "p", x: "Most day-to-day exposure lives on the folder axis. An editor granted two folders out of forty is narrow; an editor granted all forty is effectively a project-wide editor, whatever their role is called. When something leaks, the question is rarely 'what role did they hold' — it is 'which folders were they granted, and by whom'." },
+  { t: "callout", kind: "warn", title: "The audit nobody runs", x: "Programs audit role memberships — sometimes. They almost never audit folder permissions: the second axis, where most real reach lives. A tidy role list sitting over a sprawling, years-old folder-grant history is the classic false comfort." },
+  { t: "h2", x: "Reading a permission matrix" },
+  { t: "p", x: "Ask to see the permission matrix: roles down one side, folders across the top, the granted level in each cell. If your program cannot produce one, the folder axis is ungoverned — whatever the role list says." },
+  { t: "footer", x: "Next: how a real rail project names and scopes its roles." },
+],
+
+/* "ahead-intro" is intentionally placed out of track order in this file:
+   it belongs to the closing chapter (NEXT), not Track 1. */
 
 "ahead-intro": [
   { t: "kicker", x: "Where this is heading · AI as the next actor" },
@@ -335,6 +379,14 @@ const VIEWS = {
     ["Security-adjacent", "Station layouts, tunnel alignments, security systems, crowd-flow data", "Physical and security risk if released to the wrong hands"],
     ["Contract-controlled", "Information whose use is limited by contract terms, regardless of sensitivity", "Contract breach, even when the data is 'not secret'"],
   ]},
+  { t: "h2", x: "Marking in practice" },
+  { t: "p", x: "Classification only protects anything if it changes what someone can do. In a governed CDE it shows up in three places — not as a label in a spreadsheet, but as a permission consequence:" },
+  { t: "bullets", items: [
+    "Folder structure: the sensitive classes live in restricted folders with their own permission grants — a security-adjacent model does not sit in the open project folder.",
+    "File metadata: the class is recorded on the record itself, so anyone opening the file sees what it is.",
+    "Permission consequence: the class changes who may be granted — commercial third-party models are visible to named roles only, not to every editor on the project.",
+  ]},
+  { t: "p", x: "If the classes exist only as labels in a document, the CDE treats every file identically — and so will the AI." },
   { t: "h2", x: "Why classification is urgent now" },
   { t: "p", x: "An AI ingests whatever it is pointed at and does not self-censor. If a document is in the governed environment and a role with reach exists, then when AI arrives that role's AI will be able to read it. Classification — knowing which class each artifact is — is the only thing that lets anyone decide whether the AI should be pointed at it at all." },
   { t: "callout", kind: "warn", title: "The data-protection trap", x: "'It's on the CDE, so it's controlled' is a false comfort. Control is not where the file sits — it is who can reach it from there. A governed file in a wide role is effectively public to everyone in that role today, and to that role's AI tomorrow." },
@@ -359,7 +411,7 @@ const VIEWS = {
     "Handover: at closeout the governed records become the operator's asset data. Garbage records in = a broken digital twin out.",
   ]},
   { t: "callout", kind: "accent", title: "The lead's stake", x: "The digital-twin target means data quality is not a documentation nicety — it is the eventual product your program delivers to the operator. A governance lead protects that pipeline." },
-  { t: "footer", x: "Next: the questions a lead asks about data management." },
+  { t: "footer", x: "Next: the status ladder \u2014 how a file earns each rung." },
 ],
 
 "ahead-vectors": [
@@ -392,6 +444,28 @@ const VIEWS = {
   ]},
   { t: "callout", kind: "danger", title: "Ask", x: "Does the program treat a credentialed agent as a 'user' in any audit — and would it know if one acted on sensitive data?" },
   { t: "footer", x: "Next: the projected exposure map." },
+],
+
+"t2-status": [
+  { t: "kicker", x: "Track 2 · Data management — the status ladder" },
+  { t: "h1", x: "The status ladder" },
+  { t: "lead", x: "Every file in a governed CDE carries a status — Draft, In Review, Approved, As-Built. That status is what decides whether the file may be used. This is the ladder, and the mechanics that make it real." },
+  { t: "h2", x: "The four rungs" },
+  { t: "table", head: ["Status", "Meaning", "Who moves it", "The rule"], rows: [
+    ["Draft", "The author's working state", "The author", "Nobody treats it as current"],
+    ["In Review", "Submitted for check; locked against silent edits", "The named approvers", "The author cannot edit while review is open"],
+    ["Approved", "Released for construction or decision", "The named validator", "Changes mean a new revision — never an overwrite"],
+    ["As-Built", "Reflects what was actually built", "The field / completion team", "Becomes the operator's record"],
+  ]},
+  { t: "p", x: "Projects define their own status names, but a governed project always has these four rungs — working, checking, released, handed over. If a project cannot show you its ladder, its files have no enforceable meaning." },
+  { t: "h2", x: "The mechanics that make it real" },
+  { t: "bullets", items: [
+    "Named approvers, not 'the team': a review workflow names who validates and who quality-checks. On a real rail deployment the first workflow failed because teams picked the wrong validators. The fix was preset, per-discipline workflows with the right people named from the start.",
+    "No silent edits in review: once a file enters review, the author cannot quietly change it and resubmit the same version — the version is locked until the review closes.",
+    "Transmittals log every handover: when a record moves — to a contractor, to the client — the transmittal is the dated, signed record of what left, in which revision, to whom.",
+  ]},
+  { t: "callout", kind: "highlight", title: "The ladder, mapped to the zones", x: "WIP is Draft. Both Shared zones — Internal and Client — are In Review: internal checks first, client review next. Final Publication is the record: Approved for construction, and As-Built as the operator’s handed-over copy. The four-zone CDE on the next page is this ladder given a physical home — one rung per zone, with In Review spanning two." },
+  { t: "footer", x: "Next: the four-zone CDE — a real project's document-control spine." },
 ],
 
 "t2-cde4": [
@@ -458,7 +532,29 @@ const VIEWS = {
   { t: "h2", x: "Why these matter to you" },
   { t: "p", x: "They are the bridge between the project and the operator. The EIR sets the standard, the AIR names what the asset needs at the end, and the MIDP schedules delivery. Together they are the contract behind the digital-twin target — and they are written in an ISO 19650-aligned house style that Metrolinx calls its own (the CADD/BIM Standards Manual and its supporting documents)." },
   { t: "callout", kind: "danger", title: "The gap that frames this tour", x: "None of these documents was written for AI. They govern exchange between humans and systems, not ingestion by language models. The exposure you learn to see in this tour sits precisely in that unwritten space." },
-  { t: "footer", x: "Next: the questions a lead asks about integration." },
+  { t: "footer", x: "Next: reading the information contract as a lead." },
+],
+
+"t3-reading": [
+  { t: "kicker", x: "Track 3 · Integration — reading the contract" },
+  { t: "h1", x: "Reading the EIR, AIR, and MIDP as a lead" },
+  { t: "lead", x: "Your teams will hand you these three documents and expect you to treat them as the rules of the flow. This is how to read each one — what to look for, and what a weak document looks like." },
+  { t: "h2", x: "What each document contains — and what to check" },
+  { t: "table", head: ["Document", "Key contents", "The lead's check"], rows: [
+    ["EIR", "Information requirements, naming and classification standards, delivery milestones, acceptance criteria", "Does it cover all three CDEs — or does it assume one? Is the naming convention enforced, or just described?"],
+    ["AIR", "The asset breakdown, the data operations needs at handover, formats, handover gates", "Is the as-built / digital-twin endgame funded with a named data owner — or an aspiration in a paragraph?"],
+    ["MIDP", "Aggregated from every supplier's TIDP: who delivers what, when, in what format", "Is it tracked live against production — or filed as a PDF nobody reopens?"],
+  ]},
+  { t: "h2", x: "The chain" },
+  { t: "p", x: "The documents form a chain. The client's EIR sets the requirements. Each supplier answers with a BIM Execution Plan and their own TIDP — Task Information Delivery Plan — their promise of what they will deliver, and when. The MIDP aggregates every TIDP into the master schedule. A break anywhere in the chain — an EIR nobody enforced, a TIDP nobody aggregated — and the master plan is decorative." },
+  { t: "h2", x: "What a weak set looks like" },
+  { t: "bullets", items: [
+    "An EIR that assumes a single CDE, while your teams actually use three.",
+    "An AIR with no handover owner and no funded path to the operator's asset data.",
+    "A MIDP that nobody tracks against actual production.",
+  ]},
+  { t: "p", x: "If you recognise all three, the integration story is documented, not governed — and the documents are describing a process that does not exist." },
+  { t: "footer", x: "Next: the federation tree — how 150 models become one." },
 ],
 
 "t3-mbs": [
@@ -500,7 +596,7 @@ const VIEWS = {
   { t: "question", x: "And when an AI is added to the data flow \u2014 who signs off the rule that governs it, and whose role does it inherit?", body: "The projected question. The answer should place the AI on a named seam (inside ACC, on an export path, or as an agent) and name a decision owner. 'It's still being discussed' is honest \u2014 and is itself the current-state finding." },
   { t: "question", x: "And when AI agents arrive \u2014 could a role be exercised by an unattended agent, and would we know?", body: "The projected question. If the answer is 'we would not know', the audit capability itself is the gap to fix first \u2014 before the agents arrive." },
   { t: "callout", kind: "accent", title: "The pattern", x: "Once more, the same shape: name the thing, name the owner, show the trail. Integration governance is seam-by-seam evidence." },
-  { t: "footer", x: "Next: where this is heading \u2014 AI as the next actor." },
+  { t: "footer", x: "Next: put the map to work \u2014 four cases." },
 ],
 
 /* ============ CASE STUDIES — guided detective sequences ============ */
@@ -509,7 +605,14 @@ const VIEWS = {
   { t: "kicker", x: "Case studies · How these work" },
   { t: "payoff", what: "chapter", x: "you can spot a governance failure, locate it on the exposure map, and land the question that exposes it \u2014 on four real situations, three synthetic and one from an actual high-speed rail deployment." },
   { t: "h1", x: "Put the map to work" },
-  { t: "lead", x: "The tracks taught you the mechanics. These three cases show you the situations a Project Lead actually meets — each one a realistic moment on a subway program where governance, data, or integration was put to the test." },
+  { t: "lead", x: "The tracks taught you the mechanics. These four cases show you the situations a Project Lead actually meets — each one a realistic moment on a subway program where governance, data, or integration was put to the test." },
+  { t: "h2", x: "The four cases" },
+  { t: "table", head: ["Case", "Track", "What you'll spot"], rows: [
+    ["CASE.1 — The ballooning shared role", "Track 1 · Governance", "A shared role that grew from 8 to 47 members — and can grant its own membership"],
+    ["CASE.2 — The superseded drawing", "Track 2 · Data management", "A working copy that outranked the record in a fabrication package"],
+    ["CASE.3 — The unauthorized export path", "Track 3 · Integration", "Two open seams: an unlogged shared link and a paste into a public AI tool"],
+    ["CASE.4 — The high-speed rail deployment", "Real-world reference", "A zone escape in a 182-person rail deployment — and the numbers that say discipline pays"],
+  ]},
   { t: "h2", x: "The three-beat sequence" },
   { t: "bullets", items: [
     "Beat 1 \u2014 Spot: open the situation, find what's wrong.",
@@ -672,6 +775,13 @@ const VIEWS = {
   ]},
   { t: "h2", x: "The one finding to remember" },
   { t: "p", x: "The governance that protects this program — the EIR, the AIR, the MIDP, the ISO 19650-aligned standards — was written before AI could read a CDE. Today the map is governed by human roles, and that is the right order. When AI arrives it will inherit those same roles — and the unwritten gap is where your teams will work. You do not need to close the gap alone. You need to see it, name it, and ask the questions — and now you can." },
+  { t: "h2", x: "What to read first on the job" },
+  { t: "p", x: "Three documents will tell you more about your program's real governance than any meeting:" },
+  { t: "bullets", items: [
+    "The EIR — does it cover the CDEs your teams actually use, or assume one?",
+    "The permission matrix — who holds Admin, who sits on each shared role, and when each was last audited?",
+    "The MIDP — who delivers what, when — and is it tracked live, or filed?",
+  ]},
   { t: "callout", kind: "accent", title: "Back on the job", x: "Walk into your next team meeting with the exposure map in mind and one diagnostic ready: pick a data type your team handles, and ask who can reach it today, whether that reach is justified — and what will change when an AI inherits it. That one habit is the whole tour, in practice." },
   { t: "footer", x: "End of tour. This shell is the fidelity-accurate object model of ACC — what you learned here transfers to the real product." },
 ],
