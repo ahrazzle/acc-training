@@ -14,6 +14,24 @@
   const nav = document.getElementById("nav");
   const main = document.getElementById("main");
 
+  const moduleToggle = document.getElementById("module-toggle");
+  const sidebar = document.getElementById("module-sidebar");
+  function closeModules() {
+    sidebar.classList.remove("mobile-open");
+    moduleToggle.setAttribute("aria-expanded", "false");
+  }
+  moduleToggle.addEventListener("click", () => {
+    const opening = !sidebar.classList.contains("mobile-open");
+    sidebar.classList.toggle("mobile-open", opening);
+    moduleToggle.setAttribute("aria-expanded", String(opening));
+  });
+  document.addEventListener("keydown", (event) => {
+    if (event.key === "Escape" && sidebar.classList.contains("mobile-open")) {
+      closeModules();
+      if (moduleToggle.offsetParent !== null) moduleToggle.focus();
+    }
+  });
+
   /* ---------- Escape HTML for user-facing strings ---------- */
   function esc(s) {
     return String(s).replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/>/g, "&gt;");
@@ -34,7 +52,11 @@
         b.className = "nav-item" + (item.id === activeId ? " active" : "");
         b.dataset.view = item.id;
         b.innerHTML = `<span class="nav-num">${esc(item.num)}</span><span>${esc(fmt(item.label))}</span>`;
-        b.addEventListener("click", () => render(item.id));
+        b.addEventListener("click", () => {
+          render(item.id);
+          closeModules();
+          main.focus?.();
+        });
         nav.appendChild(b);
       });
     });
@@ -357,7 +379,7 @@
         ${pins.length ? `<span class="lg"><span class="sw sw-pin"></span>pinned = the exposure lives here</span>` : ""}
         <span class="lg" id="ai-legend" ${aiOn ? "" : "hidden"}><span class="sw sw-ai"></span>outlined = reachable once AI arrives (projected)</span>
       </div>
-      <div class="tbl-wrap">${mapTableHtml(aiOn, pins)}</div>
+      <div class="tbl-wrap" tabindex="0" role="region" aria-label="Exposure map table">${mapTableHtml(aiOn, pins)}</div>
       <div id="ai-vectors" ${aiOn ? "" : "hidden"}></div>`;
 
     d.querySelector(".map-toggle").addEventListener("click", () => {
